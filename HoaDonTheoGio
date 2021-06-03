@@ -1,0 +1,37 @@
+package Interface;
+
+/**
+ *
+ * @author Phu Hung
+ */
+public class HoaDonTheoGio extends HoaDon {
+    private int soGioThue;
+    public HoaDonTheoGio(){
+        super();
+        soGioThue = 0;
+    }
+    public HoaDonTheoGio(String maHD, String tenKhach, String ngayHD, double donGia, int soGioThue){
+        super(maHD, tenKhach, ngayHD, donGia);
+        this.soGioThue = soGioThue;
+    }
+
+    public int getSoGioThue() {
+        return soGioThue;
+    }
+
+    public void setSoGioThue(int soGioThue) {
+        this.soGioThue = soGioThue;
+    }
+    
+    @Override
+    public double tinhThanhTien(){
+        return soGioThue * donGia;
+    }
+    public String toString(){
+        return super.toString()+" So gio thue: "+soGioThue+" Tong tien: "+tinhThanhTien();
+    }
+    public static void main (String []args){
+        HoaDonTheoGio a = new HoaDonTheoGio("0001","Nguyen Van A","1/1/2020",15000,6);
+        System.out.println(a);
+    }
+}
