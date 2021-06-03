@@ -1,0 +1,29 @@
+public class NgayThang {
+	private int ngay, thang, nam;
+	public NgayThang(){
+		ngay = thang= 1;
+                nam=2000;
+		
+	}
+	public NgayThang(int ngay, int thang, int nam){
+		this.ngay = ngay;
+		this.thang = thang;
+		this.nam = nam;
+	}
+	public NgayThang(String nt){
+            ngay=Integer.parseInt(nt.substring(0,nt.indexOf('/')));
+            nt=nt.substring(nt.indexOf('/')+1);
+            thang=Integer.parseInt(nt.substring(0,nt.indexOf('/')));
+            nt=nt.substring(nt.indexOf('/')+1);
+            nam=Integer.parseInt(nt);
+            
+        }
+	public String toString(){
+		return ngay+"/"+thang+"/"+nam;
+	}
+        public static void main(String[] args){
+            NgayThang a = new NgayThang("12/6/2021");
+            System.out.println(a);
+        }
+}
+
