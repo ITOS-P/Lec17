@@ -1,0 +1,83 @@
+import java.io.File;
+    import java.util.Scanner;
+    import java.util.ArrayList;
+public class DanhSachHoaDon {
+    private ArrayList<HoaDon> a = new ArrayList<HoaDon>();
+    private boolean maHD;
+    public void themVaoDanhSach(String tenFile) {
+        try {
+            File f = new File(tenFile);
+            if (f.exists()) {
+                    Scanner read = new Scanner(f);
+                while(read.hasNext()){
+                    String ma, ht="", ngay;
+                    double dg = 0;
+                    int thue = 0;
+                    Scanner line = new Scanner(read.nextLine());
+                    ma = line.next();
+                    while (!line.hasNextDouble())
+                        ht = ht + line.next()+" ";              
+                    dg = line.nextDouble(); 
+                    ngay = line.next();
+                    try{
+                        thue = line.nextInt();
+                    if(ma.charAt(0)=='N'){
+                        a.add(new HoaDonTheoNgay (ma,ht,ngay,dg,thue));
+                    }
+                    else a.add(new HoaDonTheoGio (ma,ht,ngay,dg,thue));
+                   }catch(Exception e){  }
+               }System.out.println("1. Doc file thanh cong");
+            }else System.out.println("file khong ton tai");
+        }catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+    public void layDanhSachHoaDon(String noiDung){
+        System.out.println(noiDung);
+        for(HoaDon x : a){
+            System.out.println(x);
+        }
+    }
+    public void timHoaDon(String k){
+        for(int i=0;i<a.size();i++){
+            if((k.equals(a.get(i).getMaHD()))== true)
+               System.out.println(a.get(i));
+       }
+    }
+    public void xoaTheoMaHoaDon(String z){
+        for(int i=0;i<a.size();i++){
+            if((z.equals(a.get(i).getMaHD()))== true)
+                a.remove(a.get(i));
+        }
+    }
+    public double tinhTongThanhTien(){
+        double s=0;
+        for (HoaDon x : a)
+            s = s + x.tinhThanhTien();
+        return s;
+    }
+    public void output(){
+        layDanhSachHoaDon("2. Danh sach hoa don: ");
+        System.out.println("---------------------------");
+        Scanner kb = new Scanner(System.in);
+        String z,k;
+        System.out.print("Nhap maHD can tim: ");
+        k = kb.next();
+        System.out.println("4. Hoa don can tim: ");timHoaDon(k);
+        System.out.println("---------------------------");
+        System.out.println("5. Tong thanh tien: "+tinhTongThanhTien());
+        System.out.println("---------------------------");
+    	System.out.print("Nhap maHD can xoa: ");
+        z = kb.next();
+        xoaTheoMaHoaDon(z);
+        layDanhSachHoaDon("3. Danh sach hoa don sau khi xoa: ");
+        System.out.println("---------------------------");
+        
+    }
+    public static void main (String [] args){
+        System.out.println("CS311_D_Lec17_ToQuangPhu");
+        DanhSachHoaDon a = new DanhSachHoaDon();
+        a.themVaoDanhSach("D:\\Thue.txt");
+        a.output();
+    }
+}
