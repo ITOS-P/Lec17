@@ -1,0 +1,9 @@
+package Interface;
+
+/**
+ *
+ * @author Phu Hung
+ */
+    public interface IHoaDon {
+    public double tinhThanhTien(); 
+}
